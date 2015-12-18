@@ -4,7 +4,7 @@
 #define mp(a,b) make_pair(a,b)
 #define rep(i,a,b) for(int i = a; i <= b; i++)
 using namespace std;
-const int N = 18010, M = 997807;
+const int N = 180000, M = 997807;
 typedef long long LL; 
 
 struct hashnode{
@@ -34,8 +34,8 @@ pair<LL, LL> f(LL n, int a, int b){
     
     pair<LL, LL> t = qry(n, a, b), ans = mp(0, 0);
     if (t.first != -1) return t;
-    
-    
+
+    LL t1 = n;//!
     while (n / pw[a] && n > 0){
         if (n % pw[a] == 0) {
             int t = n / pw[a];
@@ -46,6 +46,7 @@ pair<LL, LL> f(LL n, int a, int b){
         ans.second += t.second, ans.first += t.first;
     }
 
+    add(t1, a, b, ans.first, ans.second);
     return ans;
 }
 int main(){
