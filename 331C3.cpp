@@ -27,9 +27,8 @@ pair<LL, LL> qry(LL a, int b, int c){
 
 LL pw[19];
 pair<LL, LL> f(LL n, int a, int b){ 
-    cout <<n<<' '<<a<<' '<<b<<endl;
     if (n == 0) return mp(0, 0);
-    if (n < b) return mp(1, -b); else if (a == 0) return mp(1, -n);
+    if (n <= b) return mp(1, -b); else if (a == 0) return mp(1, -n);
 
     if (n / pw[a] == 0) return f(n, a - 1, b);
     
@@ -38,7 +37,10 @@ pair<LL, LL> f(LL n, int a, int b){
     
     
     while (n / pw[a] && n > 0){
-        if (n % pw[a] == 0) n -= b, ans.second -= b, ans.first++;
+        if (n % pw[a] == 0) {
+            int t = n / pw[a];
+            n -= max(b, t), ans.second -= max(b, t), ans.first++;
+        }
         t = f(n % pw[a], a - 1, max(b, n / pw[a]));
         n += t.second;
         ans.second += t.second, ans.first += t.first;
@@ -50,5 +52,5 @@ int main(){
     int n; scanf("%d",&n);
     pw[0] = 1;
     rep(i,1,18) pw[i] = pw[i - 1] * 10; 
-    cout <<f(n, 18, 0).second<<endl;
+    cout <<f(n, 18, 0).first<<endl;
 }
