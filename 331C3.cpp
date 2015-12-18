@@ -50,7 +50,7 @@ pair<LL, LL> f(LL n, int a, int b){
     return ans;
 }
 int main(){
-    int n; scanf("%d",&n);
+    LL n; cin >>n;
     pw[0] = 1;
     rep(i,1,18) pw[i] = pw[i - 1] * 10; 
     cout <<f(n, 18, 0).first<<endl;
